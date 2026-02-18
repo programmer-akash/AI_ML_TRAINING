@@ -3,98 +3,119 @@
 ![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-150458?logo=pandas&logoColor=white)
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-Visualization-orange)
-![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-013243?logo=numpy&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-Scientific%20Computing-013243?logo=numpy&logoColor=white)
+![Google Colab](https://img.shields.io/badge/Google%20Colab-Notebook-F9AB00?logo=googlecolab&logoColor=white)
+
+---
 
 ## 📌 Overview
 
-This project performs an **Exploratory Data Analysis (EDA)** on the classic [Titanic dataset](https://github.com/datasciencedojo/datasets/blob/master/titanic.csv) to uncover patterns and insights about passenger survival. It covers the full EDA workflow — from data loading and cleaning through statistical analysis and visualization — alongside foundational Python and data science concepts.
+This project performs **Exploratory Data Analysis (EDA)** on the classic **Titanic dataset** to uncover patterns and insights about passenger survival. It also serves as a hands-on introduction to core Python programming concepts and data visualization techniques.
 
 ---
 
-## 📊 Dataset
+## 🎯 Objectives
+
+- Load and inspect a real-world dataset using **Pandas**
+- Understand the structure, data types, and statistical properties of the data
+- Detect and handle **missing values**
+- Perform basic **survival analysis** across different passenger groups
+- Create meaningful **visualizations** using Matplotlib
+- Practice core Python fundamentals alongside data science workflows
+
+---
+
+## 📂 Dataset
 
 | Property | Details |
 |---|---|
+| **Name** | Titanic Passenger Dataset |
 | **Source** | [datasciencedojo/datasets](https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv) |
-| **Records** | 891 passengers |
-| **Features** | 12 columns (PassengerId, Survived, Pclass, Name, Sex, Age, SibSp, Parch, Ticket, Fare, Cabin, Embarked) |
-| **Missing Values** | Age (177), Cabin (687), Embarked (2) |
+| **Rows** | 891 |
+| **Columns** | 12 |
+
+### Key Features
+
+| Column | Description |
+|---|---|
+| `Survived` | Survival status (0 = No, 1 = Yes) |
+| `Pclass` | Passenger class (1st, 2nd, 3rd) |
+| `Sex` | Gender of the passenger |
+| `Age` | Age in years |
+| `SibSp` | Number of siblings/spouses aboard |
+| `Parch` | Number of parents/children aboard |
+| `Fare` | Ticket fare paid |
+| `Embarked` | Port of embarkation (C, Q, S) |
 
 ---
 
-## 🔍 EDA Workflow
+## 🛠️ Tech Stack
+
+- **Python 3.x**
+- **Pandas** — data loading, manipulation, and analysis
+- **Matplotlib** — data visualization and plotting
+- **NumPy** — numerical operations
+- **Google Colab** — development environment
+
+---
+
+## 📋 Project Workflow
 
 ### Step 1 — Import Libraries
-Set up `pandas` for data handling and `matplotlib` for visualization.
+Import `pandas`, `matplotlib`, `numpy`, and other required libraries.
 
 ### Step 2 — Load Dataset
-Read the Titanic CSV directly from a public URL using `pd.read_csv()`.
+Read the Titanic CSV directly from a public GitHub URL using `pd.read_csv()`.
 
 ### Step 3 — Understand the Data
-Explored dataset shape (`891 rows × 12 columns`), data types via `df.info()`, and descriptive statistics via `df.describe()`.
+- Inspect shape, column names, and data types with `df.info()`
+- Generate descriptive statistics using `df.describe()`
+- Preview the first few rows with `df.head()`
 
 ### Step 4 — Handle Missing Values
-- **Age**: Filled 177 missing values with the column mean
-- **Embarked**: Filled 2 missing values with the mode
+Identified missing data in three columns:
 
-### Step 5 — Analysis
-Counted survival outcomes across the passenger population.
+| Column | Missing Values | Strategy |
+|---|---|---|
+| `Age` | 177 | Filled with mean age |
+| `Cabin` | 687 | Left as-is (too many missing) |
+| `Embarked` | 2 | Filled with mode |
+
+### Step 5 — Simple Analysis
+- Counted survival distribution: **549 did not survive**, **342 survived**
+- Analyzed survival rates by gender and passenger class
 
 ### Step 6 — Visualizations
-Generated three key charts:
-- **Survival Count** — Bar chart of survived vs. did not survive
-- **Gender vs. Survival Rate** — Grouped bar chart by sex
-- **Age Distribution** — Histogram with 20 bins
+Created charts including:
+- Bar charts for survival counts
+- Line plots for pulse vs. calorie burnage (Sports Watch dataset demo)
+- Additional plots demonstrating Matplotlib's flexibility
 
 ---
 
-## 📈 Key Findings
+## 🔍 Key Findings
 
-> - **Majority did not survive** — more passengers died than survived
-> - **Females had a significantly higher survival rate** than males
-> - **Most passengers were aged 20–40 years**
-> - **Age and gender were strong predictors** of survival outcome
+- The overall survival rate was approximately **38.4%**
+- Significant disparities existed in survival rates across **passenger class** and **gender**
+- The `Cabin` column had over **77% missing data**, making it unsuitable for direct analysis
+- `Age` had ~20% missing values, imputed using the mean (~29.7 years)
 
 ---
 
 ## 🐍 Python Concepts Practiced
 
-Beyond EDA, this notebook also reinforces core Python and library fundamentals:
+This notebook also covers Python fundamentals as part of the learning journey:
 
-| Concept | What Was Covered |
-|---|---|
-| Variables & Data Types | Integers, floats, strings, operators |
-| f-Strings | Formatted string output |
-| Lists & Indexing | Positive and negative indexing |
-| Conditional Statements | `if`, `elif`, `else`, nested conditions |
-| Loops | `for` loops, `range()`, even/odd/reverse sequences, nested loops |
-| String Methods | `.upper()`, `.lower()`, `.index()` |
-| Functions | User-defined functions, parameters, return values |
-| Modules | `math`, `datetime` standard library modules |
-| **Matplotlib** | Line plots, scatter plots, bar charts, histograms, pie charts |
-| **NumPy** | Array creation, random distributions, numerical operations |
+- **Built-in modules**: `math`, `datetime`
+- **Control flow**: `for` loops, `while` loops, nested loops
+- **String methods**: `.upper()`, `.lower()`, `.index()`
+- **User-defined functions**: defining, calling, parameters vs. arguments
 
 ---
 
-## 🗂️ Project Structure
-
-```
-Project_1__EDA_/
-│
-├── Project_1__EDA_.ipynb   # Main Jupyter Notebook
-└── README.md               # Project documentation
-```
-
----
-
-## ⚙️ Setup & Installation
+## 🚀 Getting Started
 
 ### Prerequisites
-- Python 3.x
-- Jupyter Notebook or [Google Colab](https://colab.research.google.com/)
-
-### Install Dependencies
 
 ```bash
 pip install pandas matplotlib numpy
@@ -102,49 +123,48 @@ pip install pandas matplotlib numpy
 
 ### Run the Notebook
 
-```bash
-jupyter notebook Project_1__EDA_.ipynb
-```
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+   ```
+2. Open the notebook in Google Colab or Jupyter:
+   ```bash
+   jupyter notebook "Project_1__EDA_.ipynb"
+   ```
+3. Run all cells from top to bottom.
 
-> **Note:** No local dataset download needed — data is loaded directly from a URL at runtime.
+> **Note:** The dataset is loaded directly from a public URL — no manual download required.
 
 ---
 
-## ⚠️ Known Issues
-
-The following `FutureWarning` appears when filling missing values with `inplace=True` (deprecated in Pandas 3.0):
+## 📁 Repository Structure
 
 ```
-FutureWarning: A value is trying to be set on a copy of a DataFrame...
-```
-
-**Fix:** Replace with direct assignment:
-```python
-# Old (deprecated)
-df["Age"].fillna(df["Age"].mean(), inplace=True)
-
-# Recommended
-df["Age"] = df["Age"].fillna(df["Age"].mean())
+📦 your-repo-name
+ ┣ 📓 Project_1__EDA_.ipynb   # Main notebook
+ ┗ 📄 README.md               # Project documentation
 ```
 
 ---
 
-## 🛠️ Technologies Used
+## 🤝 Contributing
 
-- **Python 3** — Core language
-- **Pandas** — Data manipulation and analysis
-- **Matplotlib** — Static data visualizations
-- **NumPy** — Array operations and numerical computing
-- **Jupyter Notebook** — Interactive development environment
-
----
-
-## 👤 Author
-
-Feel free to connect or reach out if you have feedback or questions!
+Contributions, suggestions, and improvements are welcome! Feel free to open an issue or submit a pull request.
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is open-source and available under the [MIT License](LICENSE).
+
+---
+
+## 👤 Mentor
+
+**Your Name**
+- GitHub: [@your-username](https://github.com/programmer-sahil)
+- LinkedIn: [your-linkedin](https://linkedin.com/in/programmer-sahil)
+
+---
+
+> *"The goal is to turn data into information, and information into insight."* — Carly Fiorina
