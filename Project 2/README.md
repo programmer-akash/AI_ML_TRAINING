@@ -1,302 +1,154 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<readme>
+# 🏠 House Price Prediction — Linear Regression
 
-  <!-- =====================================================================
-       Project 2: House Price Prediction — Linear Regression
-       Author: [Your Name]
-       GitHub: [Your GitHub Profile URL]
-       ===================================================================== -->
+A machine learning project that predicts California house prices using Linear Regression, built with Python and scikit-learn.
 
-  <project>
-    <title>🏠 Project 2: House Price Prediction using Linear Regression</title>
+---
 
-    <badges>
-      <badge label="Python"      color="blue"   logo="python"        message="3.x"/>
-      <badge label="Scikit-Learn" color="orange" logo="scikit-learn"  message="ML"/>
-      <badge label="Pandas"      color="150458" logo="pandas"        message="Data Analysis"/>
-      <badge label="NumPy"       color="013243" logo="numpy"         message="Numerical Computing"/>
-      <badge label="Matplotlib"  color="red"    logo="matplotlib"    message="Visualization"/>
-      <badge label="Jupyter"     color="F37626" logo="jupyter"       message="Notebook"/>
-    </badges>
+## 📌 Project Overview
 
-    <overview>
-      This project builds a Machine Learning model using Linear Regression to predict
-      California house prices based on features like median income, house age, average
-      rooms, population, and geographic location. It follows a complete ML pipeline —
-      from data loading, exploration, and preprocessing through model training,
-      evaluation, feature engineering, and saving predictions.
-    </overview>
-  </project>
+This project trains a supervised regression model on the **California Housing Dataset** (built into scikit-learn) to predict median house values based on demographic and geographic features. The workflow covers everything from data loading and EDA to model training, evaluation, feature importance analysis, and a log-transform improvement experiment.
 
-  <!-- ===================================================================== -->
+---
 
-  <dataset>
-    <name>California Housing Dataset</name>
-    <source>Built-in — sklearn.datasets.fetch_california_housing()</source>
-    <note>No download required. Loaded directly via Scikit-Learn.</note>
+## 🎯 Objective
 
-    <stats>
-      <stat key="Total Records"  value="20,640 rows"/>
-      <stat key="Features"       value="8 input features + 1 target (Price)"/>
-      <stat key="Missing Values" value="None — clean dataset"/>
-      <stat key="Target"         value="Median House Price (in $100,000s)"/>
-    </stats>
+> Train a Linear Regression model that accurately predicts house prices based on features such as income, house age, number of rooms, population, and location.
 
-    <features>
-      <feature name="MedInc"     description="Median income of block group"/>
-      <feature name="HouseAge"   description="Median house age in block group"/>
-      <feature name="AveRooms"   description="Average number of rooms per household"/>
-      <feature name="AveBedrms"  description="Average number of bedrooms per household"/>
-      <feature name="Population" description="Block group population"/>
-      <feature name="AveOccup"   description="Average number of household members"/>
-      <feature name="Latitude"   description="Geographic latitude"/>
-      <feature name="Longitude"  description="Geographic longitude"/>
-      <feature name="Price"      description="TARGET — Median house value (in $100,000s)"/>
-    </features>
-  </dataset>
+---
 
-  <!-- ===================================================================== -->
+## 📂 Repository Structure
 
-  <ml_pipeline>
+```
+├── Project_2.ipynb               # Main Jupyter Notebook
+├── house_price_prediction.csv    # Saved prediction results (Actual vs Predicted)
+└── README.md
+```
 
-    <step number="1" title="Import Libraries">
-      <description>
-        Imported NumPy, Pandas, Matplotlib, and Scikit-Learn modules:
-        fetch_california_housing, train_test_split, LinearRegression,
-        mean_squared_error, and r2_score.
-      </description>
-    </step>
+---
 
-    <step number="2" title="Load Dataset">
-      <description>
-        Loaded dataset using sklearn's built-in fetch_california_housing().
-        Converted to a Pandas DataFrame and appended the target column "Price".
-      </description>
-    </step>
+## 📊 Dataset
 
-    <step number="3" title="Data Understanding">
-      <description>
-        Explored shape (20,640 × 9), dtypes (all float64), and statistical
-        summary. Mean house price: ~$206,855. Mean median income: ~$38,707.
-      </description>
-    </step>
+| Property | Details |
+|---|---|
+| **Source** | `sklearn.datasets.fetch_california_housing` |
+| **Samples** | 20,640 |
+| **Features** | 8 |
+| **Target** | Median house value (in $100,000s) |
 
-    <step number="4" title="Check Missing Values">
-      <description>
-        Verified with df.isnull().sum(). Result: zero missing values across
-        all 9 columns. No imputation required.
-      </description>
-    </step>
+**Features:**
 
-    <step number="5" title="Feature and Target Selection">
-      <description>
-        X (features): All 8 columns excluding "Price" — shape (20640, 8).
-        y (target): "Price" column — shape (20640,).
-      </description>
-    </step>
+| Feature | Description |
+|---|---|
+| `MedInc` | Median income in block group |
+| `HouseAge` | Median house age in block group |
+| `AveRooms` | Average number of rooms per household |
+| `AveBedrms` | Average number of bedrooms per household |
+| `Population` | Block group population |
+| `AveOccup` | Average number of household members |
+| `Latitude` | Block group latitude |
+| `Longitude` | Block group longitude |
 
-    <step number="6" title="Train-Test Split">
-      <description>
-        Split data 80/20 using train_test_split with random_state=42 for
-        reproducibility.
-      </description>
-      <split>
-        <train rows="16,512" features="8"/>
-        <test  rows="4,128"  features="8"/>
-      </split>
-    </step>
+---
 
-    <step number="7" title="Train Linear Regression Model">
-      <description>
-        Instantiated and fit a LinearRegression model on the training set
-        using Scikit-Learn's LinearRegression().fit(X_train, y_train).
-      </description>
-    </step>
+## 🔧 Tech Stack
 
-    <step number="8" title="Make Predictions">
-      <description>
-        Generated predictions on the test set using model.predict(X_test).
-        Compared first 10 predicted vs actual prices for quick validation.
-      </description>
-    </step>
+- **Language:** Python 3
+- **Environment:** Google Colab
+- **Libraries:**
+  - `NumPy` — numerical operations
+  - `Pandas` — data manipulation
+  - `Matplotlib` — data visualization
+  - `Scikit-learn` — model training & evaluation
 
-    <step number="9" title="Model Evaluation (RMSE + R²)">
-      <description>
-        Evaluated model performance using two standard regression metrics.
-      </description>
-      <results>
-        <metric name="RMSE"     value="0.7456" interpretation="Average prediction error (lower is better)"/>
-        <metric name="R² Score" value="0.5758" interpretation="Model explains ~57.6% of price variance"/>
-      </results>
-    </step>
+---
 
-    <step number="10" title="Visualization: Actual vs Predicted">
-      <description>
-        Scatter plot of actual vs predicted prices. Points closer to the
-        diagonal line indicate better model accuracy.
-      </description>
-    </step>
+## 🧪 Project Workflow
 
-    <step number="11" title="Residual Plot (Error Analysis)">
-      <description>
-        Plotted residuals (actual - predicted) vs predicted values. A random
-        scatter around the zero line indicates no major systematic bias.
-      </description>
-    </step>
+The notebook follows a structured 14-step pipeline:
 
-    <step number="12" title="Feature Importance (Coefficients)">
-      <description>
-        Extracted and ranked model coefficients to understand feature impact.
-      </description>
-      <coefficients>
-        <coef feature="AveBedrms"  value="+0.7831" impact="Increases price"/>
-        <coef feature="MedInc"     value="+0.4487" impact="Increases price"/>
-        <coef feature="HouseAge"   value="+0.0097" impact="Minor positive effect"/>
-        <coef feature="Population" value="-0.0000" impact="Negligible"/>
-        <coef feature="AveOccup"   value="-0.0035" impact="Minor negative effect"/>
-        <coef feature="AveRooms"   value="-0.1233" impact="Decreases price"/>
-        <coef feature="Latitude"   value="-0.4198" impact="Decreases price"/>
-        <coef feature="Longitude"  value="-0.4337" impact="Decreases price"/>
-      </coefficients>
-    </step>
+1. **Import Libraries**
+2. **Load Dataset** from scikit-learn (no download required)
+3. **Exploratory Data Analysis** — `df.head()`, `df.describe()`
+4. **Check Missing Values**
+5. **Data Visualization** — distributions, correlations
+6. **Feature & Target Split** — `X` and `y`
+7. **Train/Test Split** — 80/20 with `random_state=42`
+8. **Train Linear Regression Model**
+9. **Make Predictions**
+10. **Evaluate Model** — RMSE and R² Score
+11. **Visualize Results** — Actual vs Predicted plot
+12. **Feature Importance** — Coefficient analysis
+13. **Model Improvement** — Log transformation on target variable
+14. **Save Results** — Export predictions to CSV
 
-    <step number="13" title="Feature Engineering — Log Transform">
-      <description>
-        Applied log1p transformation to the target variable (y) to reduce
-        skewness and retrained the model for comparison.
-      </description>
-      <improved_results>
-        <metric name="RMSE"     value="0.2244" note="Significant improvement"/>
-        <metric name="R² Score" value="0.6006" note="Better variance explained"/>
-      </improved_results>
-    </step>
+---
 
-    <step number="14" title="Save Model Outputs">
-      <description>
-        Saved prediction results as a CSV file for further analysis and GitHub upload.
-        Output file: house_price_prediction.csv
-      </description>
-    </step>
+## 📈 Model Performance
 
-  </ml_pipeline>
+| Metric | Baseline Model | After Log Transform |
+|---|---|---|
+| **RMSE** | — | 0.2244 |
+| **R² Score** | — | 0.6006 |
 
-  <!-- ===================================================================== -->
+> Log-transforming the target variable (`np.log1p(y)`) was applied as a feature engineering technique to reduce skewness and improve model fit.
 
-  <bonus_project>
-    <title>🔢 Mini Project: Advanced Calculator</title>
-    <filename>calculator.py</filename>
-    <description>
-      An interactive command-line calculator built with Python using a while-loop
-      menu system and the statistics module. Supports user input, type casting,
-      and both arithmetic and statistical operations.
-    </description>
-    <features>
-      <feature>Addition, Subtraction, Multiplication, Division</feature>
-      <feature>Percentage calculation</feature>
-      <feature>Average (mean) of a list of numbers</feature>
-      <feature>Median of a list of numbers</feature>
-      <feature>Mode of a list of numbers (with error handling)</feature>
-      <feature>Division-by-zero guard with informative error message</feature>
-      <feature>Clean exit option (choice 9)</feature>
-    </features>
-    <concepts_used>
-      <concept>while True loop with break</concept>
-      <concept>User input and type casting (float)</concept>
-      <concept>if/elif/else conditional branching</concept>
-      <concept>Functions (show_menu)</concept>
-      <concept>Python statistics module</concept>
-      <concept>Exception handling (try/except)</concept>
-      <concept>list() and map() for multi-number input</concept>
-    </concepts_used>
-  </bonus_project>
+---
 
-  <!-- ===================================================================== -->
+## 🔍 Key Insights
 
-  <key_findings>
-    <finding>Median income (MedInc) is the strongest positive predictor of house price</finding>
-    <finding>Geographic coordinates (Latitude, Longitude) have significant negative coefficients — location matters</finding>
-    <finding>Baseline Linear Regression achieved R² of 0.576 — reasonable but improvable</finding>
-    <finding>Log-transforming the target variable improved R² to 0.601 and cut RMSE by ~70%</finding>
-    <finding>The dataset had zero missing values, making preprocessing straightforward</finding>
-  </key_findings>
+- **`MedInc` (Median Income)** had the highest positive coefficient (~0.78), making it the strongest predictor of house price.
+- **`AveBedrms`** showed a notable positive influence (~0.78), while **`AveRooms`** had a slight negative coefficient.
+- Geographic features (`Latitude`, `Longitude`) contributed meaningfully, reflecting California's coastal price premiums.
 
-  <!-- ===================================================================== -->
+---
 
-  <skills_demonstrated>
-    <skill category="Machine Learning">
-      Linear Regression, Train-Test Split, Model Evaluation (RMSE, R²),
-      Feature Importance via Coefficients, Feature Engineering (Log Transform)
-    </skill>
-    <skill category="Data Analysis">
-      EDA, DataFrame operations, Missing Value Check, Statistical Summary
-    </skill>
-    <skill category="Visualization">
-      Scatter Plot (Actual vs Predicted), Residual Plot, Coefficient Bar Chart
-    </skill>
-    <skill category="Python">
-      Functions, Loops, Conditionals, Type Casting, Exception Handling,
-      List operations, f-Strings, Modules (statistics, math, datetime)
-    </skill>
-    <skill category="Libraries">
-      NumPy, Pandas, Matplotlib, Scikit-Learn
-    </skill>
-  </skills_demonstrated>
+## 🚀 Getting Started
 
-  <!-- ===================================================================== -->
+### Run Locally
 
-  <project_structure>
-    <file name="Project_2.ipynb"                 description="Main Jupyter Notebook — full ML pipeline"/>
-    <file name="calculator.py"                   description="Mini Project — Advanced CLI Calculator"/>
-    <file name="house_price_prediction.csv"      description="Model output — Actual vs Predicted prices"/>
-    <file name="README.xml"                      description="Project documentation (this file)"/>
-  </project_structure>
+```bash
+# Clone the repository
+git clone https://github.com/your-username/house-price-prediction.git
+cd house-price-prediction
 
-  <!-- ===================================================================== -->
+# Install dependencies
+pip install numpy pandas matplotlib scikit-learn jupyter
 
-  <setup>
-    <prerequisites>
-      <item>Python 3.x</item>
-      <item>Jupyter Notebook or Google Colab</item>
-    </prerequisites>
+# Launch the notebook
+jupyter notebook Project_2.ipynb
+```
 
-    <install_dependencies>
-      <command>pip install numpy pandas matplotlib scikit-learn</command>
-    </install_dependencies>
+### Run on Google Colab
 
-    <run_notebook>
-      <command>jupyter notebook Project_2.ipynb</command>
-    </run_notebook>
+Click the badge below to open directly in Colab:
 
-    <run_calculator>
-      <command>python calculator.py</command>
-    </run_calculator>
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/)
 
-    <note>
-      No dataset download needed. The California Housing dataset loads automatically
-      from Scikit-Learn's built-in datasets on first run.
-    </note>
-  </setup>
+> No dataset download needed — the California Housing dataset loads automatically via `sklearn.datasets`.
 
-  <!-- ===================================================================== -->
+---
 
-  <technologies>
-    <tech name="Python 3"      role="Core programming language"/>
-    <tech name="NumPy"         role="Numerical computing and array operations"/>
-    <tech name="Pandas"        role="Data manipulation and DataFrame operations"/>
-    <tech name="Matplotlib"    role="Data visualization"/>
-    <tech name="Scikit-Learn"  role="Machine learning — model training and evaluation"/>
-    <tech name="Jupyter"       role="Interactive notebook environment"/>
-    <tech name="statistics"    role="Python standard library for median/mode"/>
-  </technologies>
+## 📋 Requirements
 
-  <!-- ===================================================================== -->
+```
+numpy
+pandas
+matplotlib
+scikit-learn
+```
 
-  <author>
-    <name>[Your Name]</name>
-    <github>[https://github.com/yourusername]</github>
-    <note>Feel free to connect, fork, or raise issues!</note>
-  </author>
+---
 
-  <license>MIT License — open source and free to use.</license>
+## 🤝 Contributing
 
-</readme>
+Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+*Built with ❤️ using Python & scikit-learn*
