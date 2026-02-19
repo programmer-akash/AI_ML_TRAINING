@@ -162,8 +162,9 @@ This project is open-source and available under the [MIT License](LICENSE).
 ## 👤 Author
 
 **AKASH HALDER**
-- GitHub: [@my-username](https://github.com/programmer-akash))
-- LinkedIn: [my-linkedin](https://www.linkedin.com/in/coder-akash-halder/)
+- GitHub: [@programmer-akash](https://github.com/programmer-akash)
+- LinkedIn: [coder-akash-halder](https://www.linkedin.com/in/coder-akash-halder/)
+
 
 ---
 
