@@ -1,26 +1,26 @@
 # 🏠 House Price Prediction — Linear Regression
 
-A machine learning project that predicts California house prices using Linear Regression, built with Python and scikit-learn.
+A supervised machine learning project that predicts California house prices using Linear Regression, built with Python and scikit-learn.
 
 ---
 
 ## 📌 Project Overview
 
-This project trains a supervised regression model on the **California Housing Dataset** (built into scikit-learn) to predict median house values based on demographic and geographic features. The workflow covers everything from data loading and EDA to model training, evaluation, feature importance analysis, and a log-transform improvement experiment.
+This project trains a **Linear Regression** model on the **California Housing Dataset** (built into scikit-learn) to predict median house values based on demographic and geographic features. The workflow covers a complete 14-step ML pipeline — from data loading and EDA through model training, evaluation, feature importance analysis, log-transform improvement, and saving predictions to CSV.
 
 ---
 
 ## 🎯 Objective
 
-> Train a Linear Regression model that accurately predicts house prices based on features such as income, house age, number of rooms, population, and location.
+> Train a Linear Regression model that accurately predicts California house prices based on features such as median income, house age, number of rooms, population, and geographic location.
 
 ---
 
 ## 📂 Repository Structure
 
 ```
-├── Project_2.ipynb               # Main Jupyter Notebook
-├── house_price_prediction.csv    # Saved prediction results (Actual vs Predicted)
+├── Project_2.ipynb                  # Main Jupyter Notebook — full ML pipeline
+├── house_price_prediction.csv       # Saved prediction results (Actual vs Predicted)
 └── README.md
 ```
 
@@ -32,8 +32,9 @@ This project trains a supervised regression model on the **California Housing Da
 |---|---|
 | **Source** | `sklearn.datasets.fetch_california_housing` |
 | **Samples** | 20,640 |
-| **Features** | 8 |
+| **Features** | 8 input features |
 | **Target** | Median house value (in $100,000s) |
+| **Missing Values** | None — clean dataset |
 
 **Features:**
 
@@ -53,7 +54,7 @@ This project trains a supervised regression model on the **California Housing Da
 ## 🔧 Tech Stack
 
 - **Language:** Python 3
-- **Environment:** Google Colab
+- **Environment:** Google Colab / Jupyter Notebook
 - **Libraries:**
   - `NumPy` — numerical operations
   - `Pandas` — data manipulation
@@ -64,41 +65,111 @@ This project trains a supervised regression model on the **California Housing Da
 
 ## 🧪 Project Workflow
 
-The notebook follows a structured 14-step pipeline:
+The notebook follows a structured 14-step ML pipeline:
 
-1. **Import Libraries**
-2. **Load Dataset** from scikit-learn (no download required)
-3. **Exploratory Data Analysis** — `df.head()`, `df.describe()`
-4. **Check Missing Values**
-5. **Data Visualization** — distributions, correlations
-6. **Feature & Target Split** — `X` and `y`
-7. **Train/Test Split** — 80/20 with `random_state=42`
-8. **Train Linear Regression Model**
-9. **Make Predictions**
-10. **Evaluate Model** — RMSE and R² Score
-11. **Visualize Results** — Actual vs Predicted plot
-12. **Feature Importance** — Coefficient analysis
-13. **Model Improvement** — Log transformation on target variable
-14. **Save Results** — Export predictions to CSV
+1. **Import Libraries** — NumPy, Pandas, Matplotlib, Scikit-Learn
+2. **Load Dataset** — via `fetch_california_housing()`, no download required
+3. **Data Understanding** — `df.shape`, `df.info()`, `df.describe()`
+4. **Check Missing Values** — `df.isnull().sum()` — zero missing values found
+5. **Feature & Target Split** — `X` (8 features) and `y` (Price)
+6. **Train/Test Split** — 80/20 with `random_state=42`
+7. **Train Linear Regression Model** — `LinearRegression().fit(X_train, y_train)`
+8. **Make Predictions** — `model.predict(X_test)`
+9. **Evaluate Model** — RMSE and R² Score
+10. **Visualization** — Actual vs Predicted scatter plot
+11. **Residual Plot** — Error analysis (Predicted vs Residuals)
+12. **Feature Importance** — Coefficient analysis per feature
+13. **Model Improvement** — Log transformation on target variable (`np.log1p`)
+14. **Save Results** — Export predictions to `house_price_prediction.csv`
 
 ---
 
-## 📈 Model Performance
+## 📈 Sample Output
+
+**Dataset preview (`df.head()`):**
+
+```
+   MedInc  HouseAge  AveRooms  AveBedrms  Population  AveOccup  Latitude  Longitude  Price
+0  8.3252      41.0  6.984127   1.023810       322.0  2.555556     37.88    -122.23  4.526
+1  8.3014      21.0  6.238137   0.971880      2401.0  2.109842     37.86    -122.22  3.585
+2  7.2574      52.0  8.288136   1.073446       496.0  2.802260     37.85    -122.24  3.521
+3  5.6431      52.0  5.817352   1.073059       558.0  2.547945     37.85    -122.25  3.413
+4  3.8462      52.0  6.281853   1.081081       565.0  2.181467     37.85    -122.25  3.422
+```
+
+**Train/Test Split:**
+
+```
+Training set: (16512, 8) (16512,)
+Testing set:  (4128, 8)  (4128,)
+```
+
+**Model Evaluation:**
+
+```
+Model Evaluation Results
+RMSE:     0.7455813830127764
+R2 Score: 0.5757877060324508
+```
+
+**After Log Transform (Feature Engineering):**
+
+```
+After Log transform
+RMSE:     0.22436602177852213
+R2 Score: 0.600615972280346
+```
+
+---
+
+## 📉 Model Performance
 
 | Metric | Baseline Model | After Log Transform |
 |---|---|---|
-| **RMSE** | — | 0.2244 |
-| **R² Score** | — | 0.6006 |
+| **RMSE** | 0.7456 | **0.2244** ✅ |
+| **R² Score** | 0.5758 | **0.6006** ✅ |
 
-> Log-transforming the target variable (`np.log1p(y)`) was applied as a feature engineering technique to reduce skewness and improve model fit.
+> Log-transforming the target variable (`np.log1p(y)`) reduced skewness and cut RMSE by ~70%, improving overall model fit.
 
 ---
 
-## 🔍 Key Insights
+## 🔍 Feature Importance (Coefficients)
 
-- **`MedInc` (Median Income)** had the highest positive coefficient (~0.78), making it the strongest predictor of house price.
-- **`AveBedrms`** showed a notable positive influence (~0.78), while **`AveRooms`** had a slight negative coefficient.
-- Geographic features (`Latitude`, `Longitude`) contributed meaningfully, reflecting California's coastal price premiums.
+| Feature | Coefficient | Impact |
+|---|---|---|
+| `AveBedrms` | +0.7831 | ⬆️ Increases price |
+| `MedInc` | +0.4487 | ⬆️ Increases price |
+| `HouseAge` | +0.0097 | Minor positive effect |
+| `Population` | -0.0000 | Negligible |
+| `AveOccup` | -0.0035 | Minor negative effect |
+| `AveRooms` | -0.1233 | ⬇️ Decreases price |
+| `Latitude` | -0.4198 | ⬇️ Decreases price |
+| `Longitude` | -0.4337 | ⬇️ Decreases price |
+
+> **Positive coefficient** → feature increases predicted price. **Negative coefficient** → feature decreases predicted price.
+
+---
+
+## 💡 Key Insights
+
+- **`MedInc` (Median Income)** is the strongest positive predictor of house price
+- **Geographic coordinates** (`Latitude`, `Longitude`) carry significant weight — location strongly affects price
+- **Baseline Linear Regression** achieved R² of 0.576 — reasonable but improvable
+- **Log-transforming** the target variable improved R² to 0.601 and cut RMSE by ~70%
+- The dataset had **zero missing values**, making preprocessing straightforward
+
+---
+
+## 🔍 Key Concepts Used
+
+- **Linear Regression** — supervised regression using `sklearn.linear_model`
+- **Train-Test Split** — `train_test_split` with 80/20 ratio and `random_state=42`
+- **Model Evaluation** — RMSE (lower = better) and R² score (closer to 1 = better)
+- **Feature Importance** — extracting and ranking `model.coef_` values
+- **Feature Engineering** — `np.log1p()` log transform to reduce target skewness
+- **Residual Analysis** — plotting errors to detect systematic bias
+- **DataFrame operations** — `df.drop()`, `df.groupby()`, `df.isnull()`
+- **CSV Export** — saving predictions with `df.to_csv()`
 
 ---
 
@@ -142,6 +213,14 @@ scikit-learn
 ## 🤝 Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
+
+---
+
+## 👤 Author
+
+**AKASH HALDER**
+- GitHub: [@programmer-akash](https://github.com/programmer-akash)
+- LinkedIn: [coder-akash-halder](https://www.linkedin.com/in/coder-akash-halder/)
 
 ---
 
