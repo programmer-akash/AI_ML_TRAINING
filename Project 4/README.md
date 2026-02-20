@@ -181,6 +181,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ⭐ *If this project helped you, consider giving it a star!*
 
-Built with 💜 by **Akash Halder** • Mentored by **SK Sahil** @ [Code_ScholarEU](https://www.instagram.com/code_scholar_eu/)
+Built with 💜 by **Akash Halder** 
 
 </div>
