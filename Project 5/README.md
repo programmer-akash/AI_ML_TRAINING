@@ -190,6 +190,5 @@ Working on this project helped me understand:
 
 <div align="center">
 
-⭐ *If this project helped you, consider giving it a star!*
 
 </div>
