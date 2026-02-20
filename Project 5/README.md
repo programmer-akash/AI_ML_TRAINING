@@ -49,7 +49,7 @@ The system can recognize **7 human emotions** from live video with bounding boxe
 ## 📁 Project Structure
 
 ```
-emotion-detection/
+Project 5/
 ├── emotion_detection.py                  # Main script — run this
 ├── emotion_model.hdf5                    # Pre-trained Keras emotion model
 ├── haarcascade_frontalface_default.xml   # OpenCV face detection classifier
