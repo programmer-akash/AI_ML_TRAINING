@@ -134,18 +134,8 @@ tensorflow
 ---
 
 ## 📸 Sample Output
+<img width="327" height="419" alt="image" src="https://github.com/user-attachments/assets/1e70bda6-355d-477d-a879-9be94760c995" />
 
-```
-┌─────────────────────────────────┐
-│                                 │
-│      Happy                      │
-│   ┌───────────┐                 │
-│   │  😄 Face  │                 │
-│   └───────────┘                 │
-│                                 │
-│   Emotion Detection System      │
-└─────────────────────────────────┘
-```
 
 > *Green bounding box drawn around each detected face with the predicted emotion label displayed above it.*
 
